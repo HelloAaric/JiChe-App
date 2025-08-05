@@ -1,0 +1,16 @@
+.\output\sci_com.o: ..\Code\900_user\sci_com\sci_com.c
+.\output\sci_com.o: ..\Code\900_user\sci_com\sci_com.h
+.\output\sci_com.o: ..\Code\900_user\sci_com\uart_upper.h
+.\output\sci_com.o: ..\Code\300_core\basic_data_type.h
+.\output\sci_com.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\sci_com.o: ..\Code\900_user\data_deal.h
+.\output\sci_com.o: ..\Code\500_LibDevelop\503_Lib\lib_SOC.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\n32h47x_48x.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\core_cm4.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_version.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_compiler.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_armcc.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\mpu_armv7.h
+.\output\sci_com.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\system_n32h47x_48x.h
+.\output\sci_com.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\output\sci_com.o: ..\Code\200_bsp\201_MCU\uart.h

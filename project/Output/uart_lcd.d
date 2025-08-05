@@ -1,0 +1,17 @@
+.\output\uart_lcd.o: ..\Code\900_user\sci_com\uart_lcd.c
+.\output\uart_lcd.o: ..\Code\900_user\sci_com\uart_lcd.h
+.\output\uart_lcd.o: ..\Code\300_core\basic_data_type.h
+.\output\uart_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\uart_lcd.o: ..\Code\900_user\data_deal.h
+.\output\uart_lcd.o: ..\Code\500_LibDevelop\503_Lib\lib_SOC.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\n32h47x_48x.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\core_cm4.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_version.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_compiler.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_armcc.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\mpu_armv7.h
+.\output\uart_lcd.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\system_n32h47x_48x.h
+.\output\uart_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\output\uart_lcd.o: ..\Code\900_user\System_Monitor.h
+.\output\uart_lcd.o: ..\Code\900_user\sci_com\uart_upper.h
+.\output\uart_lcd.o: ..\Code\900_user\ProductionID.h

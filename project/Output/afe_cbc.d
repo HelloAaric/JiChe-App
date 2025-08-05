@@ -1,0 +1,14 @@
+.\output\afe_cbc.o: ..\Code\500_LibDevelop\502_ChipDevelop\afe_cbc.c
+.\output\afe_cbc.o: ..\Code\500_LibDevelop\502_ChipDevelop\afe_cbc.h
+.\output\afe_cbc.o: ..\Code\200_bsp\202_chip\MP279x_spi.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\102_chip\MP279x.h
+.\output\afe_cbc.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\n32h47x_48x.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\core_cm4.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_version.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_compiler.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_armcc.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\mpu_armv7.h
+.\output\afe_cbc.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\system_n32h47x_48x.h
+.\output\afe_cbc.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\output\afe_cbc.o: ..\Code\300_core\basic_data_type.h

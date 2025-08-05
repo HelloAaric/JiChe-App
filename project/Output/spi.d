@@ -1,0 +1,16 @@
+.\output\spi.o: ..\Code\200_bsp\201_MCU\spi.c
+.\output\spi.o: ..\Code\200_bsp\201_MCU\spi.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\n32h47x_48x_std_periph_driver\inc\n32h47x_48x_spi.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\n32h47x_48x.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\core_cm4.h
+.\output\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_version.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_compiler.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_armcc.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\mpu_armv7.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\system_n32h47x_48x.h
+.\output\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\n32h47x_48x_std_periph_driver\inc\n32h47x_48x_rcc.h
+.\output\spi.o: ..\Code\200_bsp\201_MCU\io_define.h
+.\output\spi.o: ..\Code\300_core\basic_data_type.h
+.\output\spi.o: ..\Code\100_MCAL\101_MCU\n32h47x_48x_std_periph_driver\inc\n32h47x_48x_gpio.h

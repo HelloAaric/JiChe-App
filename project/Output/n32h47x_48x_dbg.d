@@ -1,0 +1,11 @@
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\n32h47x_48x_std_periph_driver\src\n32h47x_48x_dbg.c
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\n32h47x_48x_std_periph_driver\inc\n32h47x_48x_dbg.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\n32h47x_48x.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\core_cm4.h
+.\output\n32h47x_48x_dbg.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_version.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_compiler.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\cmsis_armcc.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\core\mpu_armv7.h
+.\output\n32h47x_48x_dbg.o: ..\Code\100_MCAL\101_MCU\CMSIS\device\system_n32h47x_48x.h
+.\output\n32h47x_48x_dbg.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
