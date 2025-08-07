@@ -42,7 +42,25 @@ void InitNode1_GPIO(void)
     InitStruct.GPIO_Current   = GPIO_DS_8mA;
     GPIO_InitPeripheral(NODE1_RX_PORT,&InitStruct);
 }
-
+/*
+这里的计算公式是：
+- 系统时钟经过 PLL 分频后为 48MHz/4 = 12MHz
+- 然后 CAN 时钟再经过预分频器 (Prescaler) 分频，这里是 1，所以还是 12MHz
+- 位时间 = (TimeSeg1 + TimeSeg2 + 1) * 预分频周期
+- 波特率 = 1 / 位时间
+对于 250K：
+- 位时间 = (36 + 11 + 1) / 12MHz = 48 / 12MHz = 4μs
+- 波特率 = 1 / 4μs = 250KHz
+通常，我们希望保持 TimeSeg1 和 TimeSeg2 的比例在合理范围内，以确保信号的稳定性。一个常见的做法是保持 TimeSeg1:TimeSeg2 约为 3:1
+对于 500K，我们可以这样计算：
+- 位时间 = 2μs
+- 12MHz 时钟下，2μs 等于 24 个时钟周期
+- 所以 TimeSeg1 + TimeSeg2 + 1 = 24
+我们可以选择 TimeSeg1 = 18，TimeSeg2 = 5，这样：
+- 18 + 5 + 1 = 24
+- 比例约为 3.6:1，接近 3:1
+*/
+#if 0
 void InitNode1_Mode(void)
 {
     FDCAN_InitType InitParam;
@@ -93,7 +111,60 @@ void InitNode1_Mode(void)
     /* Init NODE1 */
     FDCAN_Init(NODE1, &InitParam);
 }
+#else
+void InitNode1_Mode(void)
+{
+    FDCAN_InitType InitParam;
+        
+    // 使能时钟选择和分频4
+    RCC_ConfigFDCANPllClk(RCC_FDCAN_PLLSRC_DIV4);
+    /* Select PLL as FDCAN clock source */
+    RCC_ConfigFDCANClksrc(RCC_FDCAN_CLKSRC_PLL);
 
+    /* Enable NODE1 clock */
+    RCC_EnableAPB1PeriphClk(NODE1_PERIPH,ENABLE);
+
+    /* Reset NODE1 register */
+    RCC_EnableAPB1PeriphReset(NODE1_PERIPH);
+
+    /** FDCAN config parameter **/
+    /*
+        目前500K
+        48MHz/4 = 12MHz
+        12/(18+5+1) = 12/24 = 0.500MHz = 500K
+    */
+    InitParam.FrameFormat           = FDCAN_FRAME_CLASSIC;          /* Frame format */
+    InitParam.Mode                  = FDCAN_MODE_NORMAL;            /* Work mode */
+    InitParam.Prescaler             = 1;                            /* Nominal timing  */
+    InitParam.SyncJumpWidth         = 5;
+    InitParam.TimeSeg1              = 18;
+    InitParam.TimeSeg2              = 5;
+    InitParam.MsgRamStrAddr         = (uint32_t)Node1_ram;          /* Msg ram start address, shared by all FDCAN modules */
+    InitParam.MsgRamOffset          = 0;                            /* Current NODE1 msg ram start offset  */
+    InitParam.pMsgInfo              = &Node1_msg;
+    InitParam.StdFilterSize         = 32;                           /* Standard filter list */
+    InitParam.ExtFilterSize         = 0;                            /* Extended filter list */
+    InitParam.RxFifo0Size           = 32;                           /* Rx FIFO 0*/
+    InitParam.RxFifo0DataSize       = FDCAN_DATA_BYTES_8;
+    InitParam.RxFifo1Size           = 0;                            /* Rx FIFO 1*/
+    InitParam.RxFifo1DataSize       = FDCAN_DATA_BYTES_8;
+    InitParam.RxBufferSize          = 0;                            /* Dedicate Rx buffer */
+    InitParam.RxBufferDataSize      = FDCAN_DATA_BYTES_8;
+    InitParam.TxBufferSize          = 0;                            /* Tx buffer*/
+    InitParam.TxBufferDataSize      = FDCAN_DATA_BYTES_8;
+    InitParam.TxFifoQueueSize       = 16;                           /* Tx FIFO */
+    InitParam.TxFifoQueueMode       = FDCAN_TX_FIFO_MODE;
+    InitParam.TxEventSize           = 0;                            /* Tx event fifo */
+    InitParam.AutoRetransmission    = ENABLE;                       /* Enable auto retransmission */
+    InitParam.TransmitPause         = DISABLE;                      /* Disable transmit pause*/
+    InitParam.ProtocolException     = ENABLE;                       /* Enable Protocol Exception Handling */
+
+    /* Init NODE1 */
+    FDCAN_Init(NODE1, &InitParam);
+}
+#endif
+
+#if 0
 void InitNode1_Filter(void)
 {
     FDCAN_FilterType FilterParam;
@@ -107,6 +178,21 @@ void InitNode1_Filter(void)
     FilterParam.FilterID2       = 0x09F;
     FDCAN_ConfigFilter(NODE1,&FilterParam);
 }
+#else
+void InitNode1_Filter(void)
+{
+    FDCAN_FilterType FilterParam;
+
+    /* 配置扩展ID接收过滤器，接受所有ID */
+    FilterParam.IdType          = FDCAN_EXTENDED_ID;
+    FilterParam.FilterIndex     = 0;
+    FilterParam.FilterType      = FDCAN_FILTER_MASK;  // 使用掩码过滤模式
+    FilterParam.FilterConfig    = FDCAN_FILTER_TO_RXFIFO0;
+    FilterParam.FilterID1       = 0x00000000;  // 基础ID (任意值)
+    FilterParam.FilterID2       = 0x00000000;  // 掩码为0，表示接受所有ID
+    FDCAN_ConfigFilter(NODE1,&FilterParam);
+}
+#endif
 
 void InitNode1_NVIC(void)
 {
@@ -127,11 +213,19 @@ void InitNode1(void)
 	InitNode1_Filter();
     InitNode1_NVIC();
 
+#if 0
     FDCAN_ConfigGlobalFilter(NODE1,
                                 FDCAN_REJECT_STD,
                                 FDCAN_REJECT_EXT,
                                 FDCAN_FILTER_STD_REMOTE,
                                 FDCAN_FILTER_EXT_REMOTE);
+#else
+    FDCAN_ConfigGlobalFilter(NODE1,
+                                FDCAN_REJECT_STD,
+                                FDCAN_ACCEPT_EXT_IN_RX_FIFO0,
+                                FDCAN_REJECT_STD_REMOTE,
+                                FDCAN_REJECT_EXT_REMOTE);
+#endif
 
     // 这两句话是干啥的，能去掉吗
     FDCAN_ConfigTSPrescaler(NODE1, FDCAN_TIMESTAMP_PRESC_16);

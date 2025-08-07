@@ -55,7 +55,8 @@
 #include "n32h47x_48x_tim.h"
 #include "n32h47x_48x_usart.h"
 #include "n32h47x_48x_exti.h"
-#include "can_com.h"
+#include "chgr_can.h"
+
 #include "sci_com.h"
 #include "System_Monitor.h"
 #include "CBC.h"
