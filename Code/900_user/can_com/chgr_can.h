@@ -17,19 +17,6 @@ union Can_Status {
      }bits;
 };
 
-extern volatile union Can_Status Can_Status_Flag;
-extern CanRxMsg RxMessage;
-
-// 充电状态枚举
-typedef enum {
-    CHGR_STATE_IDLE = 0,
-    CHGR_STATE_HANDSHAKE,
-    CHGR_STATE_CONFIG,
-    CHGR_STATE_CHARGING,
-    CHGR_STATE_FINISH,
-    CHGR_STATE_ERROR
-} Chgr_StateType;
-
 // 协议帧ID定义
 #define CIM1_FRAME_ID     0x18C8F456
 #define CIM2_FRAME_ID     0x18C9F456
@@ -49,10 +36,20 @@ typedef enum {
 #define BST_FRAME_ID      0x186B56F4
 #define BSD_FRAME_ID      0x186C56F4
 
-// 函数声明
+// 充电阶段枚举
+typedef enum {
+    CHARGE_PHASE_IDLE = 0,
+    CHARGE_PHASE_HANDSHAKE,
+    CHARGE_PHASE_CONFIG,
+    CHARGE_PHASE_CHARGING,
+    CHARGE_PHASE_FINISH,
+    CHARGE_PHASE_ERROR
+} Charge_Phase_t;
+
+extern volatile union Can_Status Can_Status_Flag;
+extern CanRxMsg RxMessage;
+
 void App_ChgrCan(void);
 void Init_ChgrCan(void);
-void Chgr_SendMessage(uint32_t frameId, uint8_t* data, uint8_t len);
-void Chgr_ProcessReceivedMessage(CanRxMsg* rxMsg);
 
 #endif	/* _CHGR_CAN_H */
